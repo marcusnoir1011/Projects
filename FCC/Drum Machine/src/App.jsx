@@ -76,7 +76,7 @@ function App() {
     <Container className="text-center mt-5 border rounded-3">
       <Row>
         <Col>
-          <h2 id="display primary-text">{display}</h2>
+          <h2 id="display ">{display}</h2>
         </Col>
       </Row>
       <Row className="justify-content-center">

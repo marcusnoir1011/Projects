@@ -1,35 +1,106 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// Core
+import { useState } from "react";
+
+// Custom
+import "./App.css";
+import PersonalInfo from "./components/PersonalInfo.jsx";
+import EducationInfo from "./components/EducationInfo.jsx";
+import ExperienceInfo from "./components/ExperienceInfo.jsx";
+import SubmitButton from "./components/SubmitButton.jsx";
+import EditButton from "./components/EditButton.jsx";
 
 function App() {
-  const [count, setCount] = useState(0)
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [phNumber, setPhNumber] = useState("");
+    const [school, setSchool] = useState("");
+    const [study, setStudy] = useState("");
+    const [studyDate, setStudyDate] = useState("");
+    const [company, setCompany] = useState("");
+    const [positionTitle, setPositionTitle] = useState("");
+    const [responsibility, setResponsibility] = useState("");
+    const [yOfExp, setYOfExp] = useState("");
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    const [isEditing, setIsEditing] = useState(true);
+
+    // Input handling
+    const handleName = (event) => {
+        setName(event.target.value);
+    };
+    const handleEmail = (event) => {
+        setEmail(event.target.value);
+    };
+    const handlePhNumber = (event) => {
+        setPhNumber(event.target.value);
+    };
+    const handleSchool = (event) => {
+        setSchool(event.target.value);
+    };
+    const handleStudy = (event) => {
+        setStudy(event.target.value);
+    };
+    const handleStudyDate = (event) => {
+        setStudyDate(event.target.value);
+    };
+    const handleCompany = (event) => {
+        setCompany(event.target.value);
+    };
+    const handlePositionTitle = (event) => {
+        setPositionTitle(event.target.value);
+    };
+    const handleResponsibility = (event) => {
+        setResponsibility(event.target.value);
+    };
+    const handleYOfExp = (event) => {
+        setYOfExp(event.target.value);
+    };
+
+    // toggling handling
+    const handleEditing = () => {
+        setIsEditing(!isEditing);
+    };
+
+    const onSubmitClick = (event) => {
+        event.preventDefault();
+        handleEditing();
+    };
+
+    const personalData = { name, email, phNumber };
+    const personalHandlers = { handleName, handleEmail, handlePhNumber };
+    const educationData = { school, study, studyDate };
+    const educationHandlers = { handleSchool, handleStudy, handleStudyDate };
+    const experienceData = { company, positionTitle, responsibility, yOfExp };
+    const experienceHandlers = {
+        handleCompany,
+        handlePositionTitle,
+        handleResponsibility,
+        handleYOfExp,
+    };
+
+    return (
+        <>
+            <PersonalInfo
+                data={personalData}
+                handlers={personalHandlers}
+                mode={isEditing}
+            />
+            <EducationInfo
+                data={educationData}
+                handlers={educationHandlers}
+                mode={isEditing}
+            />
+            <ExperienceInfo
+                data={experienceData}
+                handlers={experienceHandlers}
+                mode={isEditing}
+            />
+            {isEditing ? (
+                <SubmitButton onSubmitClick={onSubmitClick} />
+            ) : (
+                <EditButton toggleMode={handleEditing} />
+            )}
+        </>
+    );
 }
 
-export default App
+export default App;

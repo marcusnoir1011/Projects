@@ -79,26 +79,28 @@ function App() {
 
     return (
         <>
-            <PersonalInfo
-                data={personalData}
-                handlers={personalHandlers}
-                mode={isEditing}
-            />
-            <EducationInfo
-                data={educationData}
-                handlers={educationHandlers}
-                mode={isEditing}
-            />
-            <ExperienceInfo
-                data={experienceData}
-                handlers={experienceHandlers}
-                mode={isEditing}
-            />
-            {isEditing ? (
-                <SubmitButton onSubmitClick={onSubmitClick} />
-            ) : (
-                <EditButton toggleMode={handleEditing} />
-            )}
+            <div className="container mx-auto max-w-2xl p-4 space-y-6 bg-white rounded-lg shadow-md">
+                <PersonalInfo
+                    data={personalData}
+                    handlers={personalHandlers}
+                    mode={isEditing}
+                />
+                <EducationInfo
+                    data={educationData}
+                    handlers={educationHandlers}
+                    mode={isEditing}
+                />
+                <ExperienceInfo
+                    data={experienceData}
+                    handlers={experienceHandlers}
+                    mode={isEditing}
+                />
+                {isEditing ? (
+                    <SubmitButton onSubmitClick={onSubmitClick} />
+                ) : (
+                    <EditButton toggleMode={handleEditing} />
+                )}
+            </div>
         </>
     );
 }
